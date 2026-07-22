@@ -1,0 +1,44 @@
+---
+// Logo fiel ao brandbook: grade 3×3 de quadrados arredondados
+// (cheios e vazados) em roxo + wordmark Vertico (preto) / Sys (roxo).
+interface Props {
+  size?: number;
+}
+const { size = 26 } = Astro.props;
+---
+
+<span class="logo">
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- linha 1: cheio, vazado, cheio -->
+    <rect x="0.75" y="0.75" width="8.5" height="8.5" rx="2.2" fill="#706cb0"/>
+    <rect x="12.5" y="1.5" width="7" height="7" rx="1.9" stroke="#706cb0" stroke-width="1.5"/>
+    <rect x="22.75" y="0.75" width="8.5" height="8.5" rx="2.2" fill="#706cb0"/>
+    <!-- linha 2: cheio, vazado, cheio -->
+    <rect x="0.75" y="11.75" width="8.5" height="8.5" rx="2.2" fill="#706cb0"/>
+    <rect x="12.5" y="12.5" width="7" height="7" rx="1.9" stroke="#706cb0" stroke-width="1.5"/>
+    <rect x="22.75" y="11.75" width="8.5" height="8.5" rx="2.2" fill="#706cb0"/>
+    <!-- linha 3: vazado, cheio, vazado -->
+    <rect x="1.5" y="23.5" width="7" height="7" rx="1.9" stroke="#706cb0" stroke-width="1.5"/>
+    <rect x="11.75" y="22.75" width="8.5" height="8.5" rx="2.2" fill="#706cb0"/>
+    <rect x="23.5" y="23.5" width="7" height="7" rx="1.9" stroke="#706cb0" stroke-width="1.5"/>
+  </svg>
+  <span class="wordmark">Vertico<span class="sys">Sys</span></span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+  .wordmark .sys {
+    color: var(--brand);
+  }
+</style>

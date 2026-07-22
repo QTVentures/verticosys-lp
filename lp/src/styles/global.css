@@ -1,0 +1,365 @@
+/* ============================================
+   VerticoSys — Design Tokens
+   Base estrutural: Linear (light adaptation)
+   Cores da marca: #706cb0 / #ffffff / #1d1d1d
+   ============================================ */
+
+@font-face {
+  font-family: 'Tosh A';
+  src: url('/fonts/ToshA-Regular.woff2') format('woff2'), url('/fonts/ToshA-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tosh A';
+  src: url('/fonts/ToshA-Medium.woff2') format('woff2'), url('/fonts/ToshA-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tosh A';
+  src: url('/fonts/ToshA-Bold.woff2') format('woff2'), url('/fonts/ToshA-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Neulis Sans';
+  src: url('/fonts/NeulisSans-Light.woff2') format('woff2'), url('/fonts/NeulisSans-Light.otf') format('opentype');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Neulis Sans';
+  src: url('/fonts/NeulisSans-Regular.woff2') format('woff2'), url('/fonts/NeulisSans-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Neulis Sans';
+  src: url('/fonts/NeulisSans-Bold.woff2') format('woff2'), url('/fonts/NeulisSans-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  /* Cores da marca */
+  --brand: #706cb0;
+  --brand-dark: #5a5694;
+  --brand-deep: #403d6e;
+  --brand-tint: #f0effa;
+  --brand-tint-2: #e1e0f2;
+
+  /* Superfícies (tradução clara do void→carbon→obsidian da Linear) */
+  --surface-0: #ffffff;
+  --surface-1: #fafafb;
+  --surface-2: #f4f4f6;
+  --surface-3: #ececef;
+
+  /* Bordas hairline */
+  --border-hairline: #e8e8ec;
+  --border-strong: #d8d8de;
+
+  /* Texto */
+  --text-primary: #1d1d1d;
+  --text-secondary: #4b4b52;
+  --text-muted: #75757e;
+  --text-faint: #9c9ca4;
+
+  /* Tipografia */
+  --font-display: 'Tosh A', 'Neulis Sans', system-ui, sans-serif;
+  --font-body: 'Neulis Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Escala (Linear) */
+  --text-display: clamp(48px, 7.2vw, 92px);
+  --text-heading-lg: clamp(38px, 5.2vw, 64px);
+  --text-heading: clamp(30px, 4vw, 48px);
+  --text-heading-sm: 28px;
+  --text-subheading: 21px;
+  --text-body-lg: 18px;
+  --text-body: 16px;
+  --text-body-sm: 15px;
+  --text-caption: 13px;
+  --text-label: 12px;
+
+  /* Espaçamento */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-128: 128px;
+
+  /* Raios (vocabulário da Linear: 12 / 6 / 9999) */
+  --radius-card: 12px;
+  --radius-btn: 6px;
+  --radius-badge: 4px;
+  --radius-pill: 9999px;
+
+  /* Sombras — separação por borda, não por sombra */
+  --shadow-hairline: 0 0 0 1px var(--border-hairline);
+  --shadow-sm: 0 2px 4px rgba(29, 29, 29, 0.06);
+  --shadow-card: 0 0 0 1px var(--border-hairline), 0 4px 24px rgba(29, 29, 29, 0.05);
+  --shadow-xl: 0 4px 32px rgba(29, 29, 29, 0.10);
+
+  /* Layout */
+  --page-max: 1200px;
+  --section-gap: 96px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Cursor da marca: quadradinho roxo cheio (como os que acendem o V) */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect width='16' height='16' rx='4' fill='%23706cb0'/%3E%3C/svg%3E") 8 8, auto;
+  }
+  /* clicáveis: quadrado vazado (como os quadrados de contorno do ícone) */
+  a, button, [role="button"], .btn, summary, label[for] {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect x='1.5' y='1.5' width='17' height='17' rx='5' fill='none' stroke='%23706cb0' stroke-width='2'/%3E%3C/svg%3E") 10 10, pointer;
+  }
+  /* campos de texto mantêm cursor de texto para usabilidade */
+  input, textarea, select {
+    cursor: text;
+  }
+}
+
+::selection {
+  background: var(--brand-tint-2);
+  color: var(--brand-deep);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- utilitários ---------- */
+
+.container {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: var(--space-96) 0;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-caption);
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: var(--text-display);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+}
+
+h2 {
+  font-size: var(--text-heading);
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+}
+
+h3 {
+  font-size: var(--text-subheading);
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+}
+
+/* ---------- botões ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.011em;
+  border-radius: var(--radius-btn);
+  padding: 10px 16px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background: var(--brand-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-strong);
+}
+.btn-ghost:hover {
+  border-color: var(--text-faint);
+  color: var(--text-primary);
+}
+
+.btn-pill-dark {
+  background: var(--brand);
+  color: #ffffff;
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  font-size: 13px;
+}
+.btn-pill-dark:hover {
+  background: var(--brand-dark);
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--brand);
+  font-weight: 400;
+  transition: gap 0.15s ease;
+}
+.link-arrow:hover {
+  gap: 10px;
+}
+
+/* ---------- rótulo mono numerado (estilo Linear: "2.1 Projects") ---------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.mono-index {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-faint);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- sistema de animação (move in / move out) ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(8px);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--d, 0s);
+    will-change: opacity, transform, filter;
+  }
+  [data-reveal].in {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  /* entrada do hero no load (sequência) */
+  .enter {
+    opacity: 0;
+    animation: enterUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s) both;
+  }
+  .enter-mock {
+    opacity: 0;
+    animation: enterMock 1.2s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0.5s) both;
+  }
+
+  /* compat: classe antiga */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible, .fade-up.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes enterUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes enterMock {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) translateY(64px) rotateX(7deg) scale(0.97);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1200px) translateY(0) rotateX(0deg) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* marquee de logos */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}

@@ -1,0 +1,343 @@
+---
+// Blocos de features em composição 2 colunas alternadas (texto ↔ visual),
+// com numeração mono estilo Linear ("2.1 Projects") e animações de reveal.
+---
+
+<section class="section" id="recursos">
+  <div class="container">
+
+    <!-- Cabeçalho de seção: heading gigante à esquerda, parágrafo à direita -->
+    <div class="section-head">
+      <h2 class="section-head-title" data-reveal>Mova a operação<br />financeira para frente.</h2>
+      <div class="section-head-side" data-reveal style="--d: 0.15s">
+        <p>
+          Centralize processos, aprovações, cobranças e indicadores.
+          Menos consolidação manual, mais controle operacional — com
+          rastreabilidade em cada etapa.
+        </p>
+        <a class="mono-link" href="#governanca"><span class="mono-index">1.0</span> Explorar <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <!-- Bloco 1 — Controle Financeiro -->
+    <div class="feature">
+      <div class="feature-copy" data-stagger>
+        <span class="feature-index"><span class="mono-index">1.1</span><span class="section-label">Controle financeiro</span></span>
+        <h3 class="feature-title">Toda a operação em um único ambiente.</h3>
+        <p>
+          Informações dispersas geram risco e ineficiência. A VerticoSys conecta dados,
+          processos e indicadores para proporcionar visibilidade completa sobre a operação
+          financeira — do saldo consolidado à última aprovação.
+        </p>
+        <ul class="feature-list">
+          <li>Centralização de contas, cobranças e pagamentos</li>
+          <li>Indicadores consolidados em tempo real</li>
+          <li>Visão única por empresa, área ou centro de custo</li>
+        </ul>
+      </div>
+      <div class="feature-visual" data-reveal>
+        <div class="visual-card">
+          <div class="vc-head">Consolidação por unidade</div>
+          <div class="vc-row"><span>Matriz São Paulo</span><span class="vc-bar"><i style="width: 86%"></i></span><span class="vc-val">R$ 2.1M</span></div>
+          <div class="vc-row"><span>Filial Campinas</span><span class="vc-bar"><i style="width: 62%; transition-delay: 0.35s"></i></span><span class="vc-val">R$ 1.4M</span></div>
+          <div class="vc-row"><span>Filial Curitiba</span><span class="vc-bar"><i style="width: 44%; transition-delay: 0.5s"></i></span><span class="vc-val">R$ 890K</span></div>
+          <div class="vc-row"><span>Operações digitais</span><span class="vc-bar"><i style="width: 30%; transition-delay: 0.65s"></i></span><span class="vc-val">R$ 410K</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloco 2 — Eficiência e Automação -->
+    <div class="feature reverse">
+      <div class="feature-copy" data-stagger>
+        <span class="feature-index"><span class="mono-index">1.2</span><span class="section-label">Eficiência e automação</span></span>
+        <h3 class="feature-title">Menos etapas manuais. Mais fluxo.</h3>
+        <p>
+          Rotinas fragmentadas viram fluxos estruturados, auditáveis e escaláveis.
+          Aprovações, conciliações e cobranças seguem regras definidas pela sua
+          governança — sem controles paralelos nem consolidação manual.
+        </p>
+        <ul class="feature-list">
+          <li>Fluxos de aprovação com alçadas configuráveis</li>
+          <li>Conciliação automática de recebimentos</li>
+          <li>Régua de cobrança estruturada e rastreável</li>
+        </ul>
+      </div>
+      <div class="feature-visual" data-reveal>
+        <div class="visual-card">
+          <div class="vc-head">Fluxo de aprovação · <span class="mono-index">FIN-2042</span></div>
+          <div class="flow" data-stagger>
+            <div class="flow-step done"><span class="flow-dot"></span><div><strong>Solicitação criada</strong><em>Ana Ribeiro · Financeiro</em></div></div>
+            <div class="flow-step done"><span class="flow-dot"></span><div><strong>Validação orçamentária</strong><em>Automática · dentro da alçada</em></div></div>
+            <div class="flow-step active"><span class="flow-dot"></span><div><strong>Aprovação da controladoria</strong><em>Pendente · SLA 4h</em></div></div>
+            <div class="flow-step"><span class="flow-dot"></span><div><strong>Liquidação programada</strong><em>Agendamento automático</em></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloco 3 — Inteligência para Decisão -->
+    <div class="feature">
+      <div class="feature-copy" data-stagger>
+        <span class="feature-index"><span class="mono-index">1.3</span><span class="section-label">Inteligência para decisão</span></span>
+        <h3 class="feature-title">Dados operacionais viram decisão estratégica.</h3>
+        <p>
+          Transformamos dados dispersos em indicadores e informações que apoiam a tomada
+          de decisão. Relatórios conectam números, processos e aprovações ao que realmente
+          importa: crescer com risco controlado.
+        </p>
+        <ul class="feature-list">
+          <li>Projeção de fluxo de caixa por cenário</li>
+          <li>Indicadores de inadimplência e ciclo financeiro</li>
+          <li>Relatórios prontos para diretoria e conselho</li>
+        </ul>
+      </div>
+      <div class="feature-visual" data-reveal>
+        <div class="visual-card">
+          <div class="vc-head">Indicadores do período</div>
+          <div class="stats" data-stagger>
+            <div class="stat"><span class="stat-val" data-count-to="98.1" data-decimals="1" data-suffix="%">0%</span><span class="stat-label">Conciliação automática</span></div>
+            <div class="stat"><span class="stat-val" data-count-to="4" data-suffix="h">0h</span><span class="stat-label">Ciclo médio de aprovação</span></div>
+            <div class="stat"><span class="stat-val" data-count-to="32" data-prefix="-" data-suffix="%">0%</span><span class="stat-label">Esforço operacional</span></div>
+            <div class="stat"><span class="stat-val" data-count-to="100" data-suffix="%">0%</span><span class="stat-label">Ações rastreáveis</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .section-head {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-64);
+    align-items: end;
+    padding-bottom: var(--space-96);
+  }
+  .section-head-title {
+    font-size: var(--text-heading-lg);
+  }
+  .section-head-side p {
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    font-size: var(--text-body-lg);
+  }
+  .mono-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: var(--space-24);
+    font-size: 14px;
+    color: var(--text-secondary);
+    transition: color 0.15s ease;
+  }
+  .mono-link:hover { color: var(--brand); }
+
+  .feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-80);
+    align-items: center;
+    padding: var(--space-80) 0;
+    border-top: 1px solid var(--border-hairline);
+  }
+  .feature.reverse .feature-copy { order: 2; }
+  .feature.reverse .feature-visual { order: 1; }
+
+  .feature-index {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .feature-index .section-label { margin-bottom: 0; }
+  .feature-title {
+    font-size: var(--text-heading);
+    line-height: 1.06;
+    letter-spacing: -0.022em;
+    margin-top: var(--space-24);
+  }
+  .feature-copy p {
+    color: var(--text-muted);
+    margin-top: var(--space-16);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .feature-list {
+    list-style: none;
+    margin-top: var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .feature-list li {
+    font-size: var(--text-body-sm);
+    color: var(--text-secondary);
+    padding-left: 22px;
+    position: relative;
+  }
+  .feature-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    background: var(--brand);
+    border-radius: 2px;
+  }
+
+  .visual-card {
+    background: var(--surface-0);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-24);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  }
+  .visual-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card), var(--shadow-xl);
+  }
+  .vc-head {
+    font-size: var(--text-caption);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-16);
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--border-hairline);
+  }
+  .vc-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 64px;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+  .vc-bar {
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+  .vc-bar i {
+    display: block;
+    height: 100%;
+    background: var(--brand);
+    border-radius: var(--radius-pill);
+    opacity: 0.85;
+  }
+  /* barras crescem quando o card entra na tela */
+  @media (prefers-reduced-motion: no-preference) {
+    .feature-visual .vc-bar i {
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    }
+    .feature-visual.in .vc-bar i {
+      transform: scaleX(1);
+    }
+  }
+  .vc-val {
+    text-align: right;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .flow { display: flex; flex-direction: column; }
+  .flow-step {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    position: relative;
+  }
+  .flow-step::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 28px;
+    bottom: -6px;
+    width: 1px;
+    background: var(--border-hairline);
+  }
+  .flow-step:last-child::before { display: none; }
+  .flow-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--surface-3);
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .flow-step.done .flow-dot { background: var(--brand); }
+  .flow-step.active .flow-dot {
+    background: var(--surface-0);
+    border: 2px solid var(--brand);
+    width: 9px;
+    height: 9px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .flow-step.active .flow-dot {
+      animation: pulse 2s ease-in-out infinite;
+    }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(112, 108, 176, 0.35); }
+    50% { box-shadow: 0 0 0 6px rgba(112, 108, 176, 0); }
+  }
+  .flow-step strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-primary);
+  }
+  .flow-step em {
+    font-style: normal;
+    font-size: 11.5px;
+    color: var(--text-faint);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .stat {
+    border: 1px solid var(--border-hairline);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color 0.2s ease;
+  }
+  .stat:hover { border-color: var(--brand-tint-2); }
+  .stat-val {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--brand);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 860px) {
+    .section-head {
+      grid-template-columns: 1fr;
+      gap: var(--space-24);
+      padding-bottom: var(--space-48);
+    }
+    .feature {
+      grid-template-columns: 1fr;
+      gap: var(--space-32);
+      padding: var(--space-48) 0;
+    }
+    .feature.reverse .feature-copy { order: 1; }
+    .feature.reverse .feature-visual { order: 2; }
+  }
+</style>

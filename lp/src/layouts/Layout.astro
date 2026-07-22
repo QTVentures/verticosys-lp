@@ -1,0 +1,127 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'VerticoSys — Controle financeiro sem pontos cegos',
+  description = 'A VerticoSys centraliza processos, aprovações, cobranças e informações financeiras em um único ambiente. Controle operacional, rastreabilidade e clareza para decisões com confiança.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="theme-color" content="#706cb0" />
+    <link rel="canonical" href="https://verticosys.com/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/ToshA-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/NeulisSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/NeulisSans-Light.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <slot />
+    <script>
+      // F5 sempre recarrega do topo (desativa restauração de scroll do navegador)
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+      addEventListener('beforeunload', () => window.scrollTo(0, 0));
+
+      const motionOk = matchMedia('(prefers-reduced-motion: no-preference)').matches;
+
+      // ----- stagger: marca filhos com data-reveal + delay incremental -----
+      document.querySelectorAll('[data-stagger]').forEach((group) => {
+        Array.from(group.children).forEach((child, i) => {
+          child.setAttribute('data-reveal', '');
+          (child as HTMLElement).style.setProperty('--d', `${i * 90}ms`);
+        });
+      });
+
+      // ----- reveal com entrada E saída (move in / move out) -----
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            entry.target.classList.toggle('in', entry.isIntersecting);
+          }
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+      );
+      document.querySelectorAll('[data-reveal], .fade-up').forEach((el) => io.observe(el));
+
+      // ----- contadores animados -----
+      const fmt = (v: number, d: number) => v.toFixed(d).replace('.', ',');
+      const cio = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            cio.unobserve(entry.target);
+            const el = entry.target as HTMLElement;
+            const to = parseFloat(el.dataset.countTo || '0');
+            const dec = parseInt(el.dataset.decimals || '0');
+            const pre = el.dataset.prefix || '';
+            const suf = el.dataset.suffix || '';
+            if (!motionOk) { el.textContent = pre + fmt(to, dec) + suf; continue; }
+            const t0 = performance.now();
+            const dur = 1400;
+            const step = (t: number) => {
+              const p = Math.min(1, (t - t0) / dur);
+              const ease = 1 - Math.pow(1 - p, 4);
+              el.textContent = pre + fmt(to * ease, dec) + suf;
+              if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+          }
+        },
+        { threshold: 0.6 }
+      );
+      document.querySelectorAll('[data-count-to]').forEach((el) => cio.observe(el));
+
+      // ----- nav: esconde ao descer, mostra ao subir -----
+      const nav = document.querySelector('.nav-wrap');
+      let lastY = window.scrollY;
+      addEventListener(
+        'scroll',
+        () => {
+          const y = window.scrollY;
+          if (nav) {
+            nav.classList.toggle('scrolled', y > 8);
+            if (y > 160 && y > lastY + 4) nav.classList.add('nav-hidden');
+            else if (y < lastY - 4) nav.classList.remove('nav-hidden');
+          }
+          lastY = y;
+        },
+        { passive: true }
+      );
+
+      // ----- parallax sutil no mockup do hero -----
+      const mock = document.querySelector('.hero-mock-inner') as HTMLElement | null;
+      if (mock && motionOk) {
+        let ticking = false;
+        addEventListener(
+          'scroll',
+          () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+              const y = Math.min(window.scrollY, 700);
+              mock.style.transform = `translateY(${y * -0.05}px)`;
+              ticking = false;
+            });
+          },
+          { passive: true }
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+---
+// Prova social — marquee infinito de logos em cinza neutro, estilo Linear.
+const companies = ['Atlas Capital', 'Nordica', 'Grupo Vetor', 'Prisma S.A.', 'Corten', 'Alta Holding', 'Meridian', 'Baseforte'];
+const loop = [...companies, ...companies];
+---
+
+<section class="strip">
+  <div class="container">
+    <p class="strip-label" data-reveal>Escolhida por equipes financeiras que operam com precisão</p>
+  </div>
+  <div class="marquee" data-reveal style="--d: 0.15s">
+    <div class="marquee-track">
+      {loop.map((name) => <span class="strip-logo">{name}</span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .strip {
+    padding: var(--space-64) 0 var(--space-80);
+    border-top: 1px solid var(--border-hairline);
+    border-bottom: 1px solid var(--border-hairline);
+    overflow: hidden;
+    background: var(--surface-0);
+  }
+  .strip-label {
+    text-align: center;
+    font-size: var(--text-caption);
+    color: var(--text-faint);
+    margin-bottom: var(--space-40);
+  }
+  .marquee {
+    position: relative;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 72px;
+    width: max-content;
+    padding-right: 72px;
+    animation: marquee 32s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  .strip-logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-faint);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+  .strip-logo:hover {
+    color: var(--text-secondary);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+</style>

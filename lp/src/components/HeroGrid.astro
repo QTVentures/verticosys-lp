@@ -1,0 +1,126 @@
+---
+// Fundo do hero: campo de ícones 3×3 da marca repetidos (quadrados menores).
+// Todos cintilam sutilmente; a cada ciclo, um ícone aleatório acende seu "V"
+// em roxo no padrão exato do brandbook e depois apaga.
+const CELL = 20;
+const GAP = 7;
+const STEP = CELL + GAP;
+const CLUSTER = 3 * STEP - GAP; // 74
+const CGAP = GAP; // sem respiro extra: campo contínuo de quadrados
+const CSTEP = CLUSTER + CGAP;
+const CCOLS = 6;
+const CROWS = 4;
+const W = CCOLS * CSTEP - CGAP;
+const H = CROWS * CSTEP - CGAP;
+const RX = 5;
+// padrão do ícone: 1 = cheio (forma o V), 0 = vazado
+const PATTERN = [
+  [1, 0, 1],
+  [1, 0, 1],
+  [0, 1, 0],
+];
+const rects = [];
+for (let cr = 0; cr < CROWS; cr++) {
+  for (let cc = 0; cc < CCOLS; cc++) {
+    const cluster = cr * CCOLS + cc;
+    for (let r = 0; r < 3; r++) {
+      for (let c = 0; c < 3; c++) {
+        rects.push({
+          cluster,
+          v: PATTERN[r][c] === 1,
+          vr: r,
+          x: cc * CSTEP + c * STEP,
+          y: cr * CSTEP + r * STEP,
+        });
+      }
+    }
+  }
+}
+---
+
+<div class="hero-grid" aria-hidden="true">
+  <svg id="hero-grid-svg" width={W} height={H} viewBox={`0 0 ${W} ${H}`} fill="none" xmlns="http://www.w3.org/2000/svg">
+    {rects.map(({ cluster, v, vr, x, y }) => (
+      <rect data-cluster={cluster} data-v={v ? '1' : '0'} data-vr={vr} x={x + 0.75} y={y + 0.75} width={CELL - 1.5} height={CELL - 1.5} rx={RX} />
+    ))}
+  </svg>
+</div>
+
+<style>
+  .hero-grid {
+    position: absolute;
+    top: 84px;
+    right: 24px;
+    z-index: 0;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 55% 45%, #000 45%, transparent 85%);
+    mask-image: radial-gradient(ellipse 80% 90% at 55% 45%, #000 45%, transparent 85%);
+  }
+  .hero-grid svg rect {
+    stroke: var(--brand);
+    stroke-opacity: 0.18;
+    stroke-width: 1.5;
+    fill: var(--brand);
+    fill-opacity: 0;
+    transition: fill-opacity 0.6s ease, stroke-opacity 0.6s ease;
+  }
+  .hero-grid svg rect.tw {
+    fill-opacity: 0.14;
+  }
+  .hero-grid svg rect.lit {
+    fill-opacity: 0.85;
+    stroke-opacity: 0;
+    transition: fill-opacity 0.4s ease, stroke-opacity 0.4s ease;
+  }
+  @media (max-width: 1080px) {
+    .hero-grid {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-grid svg rect[data-v='1'] {
+      fill-opacity: 0.25;
+    }
+  }
+</style>
+
+<script>
+  const svg = document.getElementById('hero-grid-svg');
+  if (svg && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    const all = Array.from(svg.querySelectorAll('rect')) as SVGRectElement[];
+    const nClusters = 24;
+    const litClusters = new Set<number>();
+
+    // células do V de cada ícone, ordenadas de cima para baixo
+    const vOf = (i: number) =>
+      all
+        .filter((el) => +el.dataset.cluster! === i && el.dataset.v === '1')
+        .sort((a, b) => +a.dataset.vr! - +b.dataset.vr!);
+
+    // cintilar aleatório (evita ícones com V aceso)
+    setInterval(() => {
+      for (let i = 0; i < 2; i++) {
+        const el = all[Math.floor(Math.random() * all.length)];
+        if (litClusters.has(+el.dataset.cluster!)) continue;
+        el.classList.add('tw');
+        setTimeout(() => el.classList.remove('tw'), 700 + Math.random() * 600);
+      }
+    }, 200);
+
+    // acende o V de um ícone aleatório, segura e apaga
+    const cycle = () => {
+      const free = [...Array(nClusters).keys()].filter((i) => !litClusters.has(i));
+      if (!free.length) return;
+      const i = free[Math.floor(Math.random() * free.length)];
+      litClusters.add(i);
+      const cells = vOf(i);
+      cells.forEach((el, j) => setTimeout(() => el.classList.add('lit'), j * 100));
+      setTimeout(() => {
+        cells.forEach((el, j) => setTimeout(() => el.classList.remove('lit'), j * 70));
+        setTimeout(() => litClusters.delete(i), cells.length * 70 + 500);
+      }, cells.length * 100 + 1800);
+    };
+    setTimeout(cycle, 1200);
+    setInterval(cycle, 2600);
+  }
+</script>

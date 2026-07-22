@@ -1,0 +1,117 @@
+---
+// Números + depoimento — prova de impacto real, conforme diretriz do brandbook
+// ("demonstrar impacto real, sem promessas absolutas").
+---
+
+<section class="results section" id="resultados">
+  <div class="container">
+    <div class="results-head">
+      <span class="feature-index" data-reveal><span class="mono-index">3.0</span><span class="section-label">Resultados</span></span>
+      <h2 data-reveal style="--d: 0.1s">Impacto real na operação financeira.</h2>
+    </div>
+    <div class="results-grid" data-stagger>
+      <div class="metric">
+        <span class="metric-val" data-count-to="40" data-prefix="-" data-suffix="%">-0%</span>
+        <p>de tempo dedicado à consolidação manual de dados no fechamento mensal.</p>
+      </div>
+      <div class="metric">
+        <span class="metric-val" data-count-to="3" data-suffix="x">0x</span>
+        <p>mais agilidade no ciclo de aprovações com alçadas automatizadas.</p>
+      </div>
+      <div class="metric">
+        <span class="metric-val" data-count-to="100" data-suffix="%">0%</span>
+        <p>das movimentações com trilha de auditoria disponível para compliance.</p>
+      </div>
+    </div>
+    <figure class="quote" data-reveal>
+      <blockquote>
+        "A VerticoSys nos deu o que planilha nenhuma dava: uma única visão da operação,
+        com rastreabilidade de ponta a ponta. O fechamento deixou de ser um evento
+        e virou rotina."
+      </blockquote>
+      <figcaption>
+        <span class="quote-name">Diretora Financeira</span>
+        <span class="quote-role">Grupo do setor de serviços B2B · 1.200 colaboradores</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .results-head {
+    max-width: 560px;
+  }
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-24);
+    margin-top: var(--space-48);
+  }
+  .metric {
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-card);
+    padding: var(--space-32) var(--space-24);
+    background: var(--surface-0);
+  }
+  .metric-val {
+    font-family: var(--font-display);
+    font-size: 52px;
+    font-weight: 500;
+    color: var(--brand);
+    letter-spacing: -0.022em;
+    display: block;
+    margin-bottom: var(--space-12);
+    font-variant-numeric: tabular-nums;
+  }
+  .metric {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  }
+  .metric:hover {
+    transform: translateY(-3px);
+    border-color: var(--brand-tint-2);
+  }
+  .feature-index {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .feature-index .section-label { margin-bottom: 0; }
+  .results-head h2 { margin-top: var(--space-24); }
+  .metric p {
+    font-size: var(--text-body-sm);
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  .quote {
+    margin-top: var(--space-64);
+    border-top: 1px solid var(--border-hairline);
+    padding-top: var(--space-48);
+    max-width: 760px;
+  }
+  .quote blockquote {
+    font-family: var(--font-display);
+    font-size: var(--text-subheading);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.012em;
+    color: var(--text-primary);
+  }
+  .quote figcaption {
+    margin-top: var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .quote-name {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .quote-role {
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+  @media (max-width: 860px) {
+    .results-grid { grid-template-columns: 1fr; }
+  }
+</style>

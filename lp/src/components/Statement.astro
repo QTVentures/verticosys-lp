@@ -1,0 +1,80 @@
+---
+// Parágrafo statement com destaque progressivo no scroll (padrão Linear):
+// as palavras vão de cinza a preto conforme a página rola.
+---
+
+<section class="statement">
+  <div class="container">
+    <p class="sr-only">
+      Uma nova categoria de gestão financeira. Construída para empresas que operam
+      em ambientes complexos, a VerticoSys define um novo padrão de controle,
+      governança e visibilidade — transformando rotinas fragmentadas em fluxos
+      estruturados, auditáveis e escaláveis.
+    </p>
+    <p class="statement-text" id="statement-text" aria-hidden="true">
+      Uma nova categoria de gestão financeira. Construída para empresas que operam
+      em ambientes complexos, a VerticoSys define um novo padrão de controle,
+      governança e visibilidade — transformando rotinas fragmentadas em fluxos
+      estruturados, auditáveis e escaláveis.
+    </p>
+  </div>
+</section>
+
+<style>
+  .statement {
+    padding: var(--space-128) 0;
+  }
+  .statement-text {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.6vw, 46px);
+    font-weight: 500;
+    line-height: 1.22;
+    letter-spacing: -0.022em;
+    color: var(--text-primary);
+    max-width: 1000px;
+  }
+  .statement-text :global(.w) {
+    color: #cfcdea;
+    transition: color 0.35s ease;
+  }
+  .statement-text :global(.w.on) {
+    color: var(--brand);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .statement-text :global(.w) {
+      color: var(--brand);
+    }
+  }
+</style>
+
+<script>
+  const el = document.getElementById('statement-text');
+  if (el && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    // envolve cada palavra em um span
+    const words = (el.textContent || '').trim().split(/\s+/);
+    el.innerHTML = words.map((w) => `<span class="w">${w}</span>`).join(' ');
+    const spans = Array.from(el.querySelectorAll('.w'));
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const start = vh * 0.85; // começa quando o topo do texto passa de 85% da tela
+      const end = vh * 0.35;   // termina quando o fim do texto chega a 35%
+      const total = start - end + rect.height;
+      const progress = Math.min(1, Math.max(0, (start - rect.top) / total));
+      const n = Math.round(progress * spans.length);
+      spans.forEach((s, i) => s.classList.toggle('on', i < n));
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+</script>

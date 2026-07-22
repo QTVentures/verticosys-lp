@@ -1,0 +1,93 @@
+---
+// CTA final — bloco escuro (contraste com a página clara), roxo como acento único.
+---
+
+<section class="cta section" id="cta">
+  <div class="container">
+    <div class="cta-card" data-reveal>
+      <h2>Controle para quem decide.<br />Visibilidade para quem lidera.</h2>
+      <p>
+        Veja como a VerticoSys estrutura aprovações, cobranças e indicadores
+        na realidade da sua operação — em uma demonstração guiada de 30 minutos.
+      </p>
+      <form class="cta-form" action="#" method="post">
+        <input type="email" name="email" placeholder="Seu e-mail corporativo" aria-label="Seu e-mail corporativo" required />
+        <button class="btn btn-primary" type="submit">Agendar demonstração</button>
+      </form>
+      <span class="cta-note">Sem compromisso. Direto com nosso time de especialistas.</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-card {
+    background: #1d1d1d;
+    border-radius: var(--radius-card);
+    padding: var(--space-80) var(--space-24);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 110%, rgba(112, 108, 176, 0.35), transparent 70%);
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cta-card::before {
+      animation: breathe 6s ease-in-out infinite;
+    }
+  }
+  @keyframes breathe {
+    0%, 100% { opacity: 0.75; }
+    50% { opacity: 1; }
+  }
+  .cta-card > * {
+    position: relative;
+  }
+  .cta-card h2 {
+    color: #ffffff;
+    font-size: var(--text-heading);
+  }
+  .cta-card p {
+    color: rgba(255, 255, 255, 0.64);
+    max-width: 480px;
+    margin: var(--space-16) auto 0;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .cta-form {
+    margin-top: var(--space-32);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .cta-form input {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-btn);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 10px 14px;
+    width: min(320px, 100%);
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .cta-form input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .cta-form input:focus {
+    border-color: var(--brand);
+  }
+  .cta-note {
+    display: block;
+    margin-top: var(--space-16);
+    font-size: var(--text-label);
+    color: rgba(255, 255, 255, 0.38);
+  }
+</style>

@@ -1,0 +1,93 @@
+---
+import Logo from './Logo.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <Logo />
+      <p>Controle, visibilidade e organização para operações financeiras complexas.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-title">Plataforma</p>
+      <a href="#recursos">Controle financeiro</a>
+      <a href="#recursos">Automação</a>
+      <a href="#governanca">Governança</a>
+      <a href="#resultados">Resultados</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-title">Empresa</p>
+      <a href="#">Sobre a VerticoSys</a>
+      <a href="#">Segurança</a>
+      <a href="#">Carreiras</a>
+      <a href="#">Contato</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-title">Recursos</p>
+      <a href="#">Central de ajuda</a>
+      <a href="#">Documentação</a>
+      <a href="#">Política de privacidade</a>
+      <a href="#">Termos de uso</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {year} VerticoSys. Todos os direitos reservados.</span>
+    <span>Feito para equipes que exigem precisão.</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border-hairline);
+    padding: var(--space-64) 0 var(--space-32);
+    background: var(--surface-1);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: var(--space-48);
+  }
+  .footer-brand p {
+    margin-top: var(--space-16);
+    font-size: var(--text-body-sm);
+    color: #6b6b74;
+    font-weight: 300;
+    max-width: 280px;
+    line-height: 1.55;
+  }
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-col .footer-title {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+  .footer-col a {
+    font-size: var(--text-caption);
+    color: #6b6b74;
+    transition: color 0.15s ease;
+  }
+  .footer-col a:hover {
+    color: var(--brand);
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: var(--space-64);
+    padding-top: var(--space-24);
+    border-top: 1px solid var(--border-hairline);
+    font-size: var(--text-label);
+    color: #6b6b74;
+  }
+  @media (max-width: 860px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
