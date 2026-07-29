@@ -1,22 +1,16 @@
 ---
 // Parágrafo statement com destaque progressivo no scroll (padrão Linear):
-// as palavras vão de cinza a preto conforme a página rola.
+// as palavras vão de lilás claro ao roxo da marca conforme a página rola.
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="statement">
   <div class="container">
-    <p class="sr-only">
-      Uma nova categoria de gestão financeira. Construída para empresas que operam
-      em ambientes complexos, a VerticoSys define um novo padrão de controle,
-      governança e visibilidade — transformando rotinas fragmentadas em fluxos
-      estruturados, auditáveis e escaláveis.
-    </p>
-    <p class="statement-text" id="statement-text" aria-hidden="true">
-      Uma nova categoria de gestão financeira. Construída para empresas que operam
-      em ambientes complexos, a VerticoSys define um novo padrão de controle,
-      governança e visibilidade — transformando rotinas fragmentadas em fluxos
-      estruturados, auditáveis e escaláveis.
-    </p>
+    <p class="sr-only">{t('statement.text')}</p>
+    <p class="statement-text" id="statement-text" aria-hidden="true">{t('statement.text')}</p>
   </div>
 </section>
 

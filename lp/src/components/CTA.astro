@@ -1,20 +1,21 @@
 ---
 // CTA final — bloco escuro (contraste com a página clara), roxo como acento único.
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="cta section" id="cta">
   <div class="container">
     <div class="cta-card" data-reveal>
-      <h2>Controle para quem decide.<br />Visibilidade para quem lidera.</h2>
-      <p>
-        Veja como a VerticoSys estrutura aprovações, cobranças e indicadores
-        na realidade da sua operação — em uma demonstração guiada de 30 minutos.
-      </p>
+      <h2>{t('cta.title1')}<br />{t('cta.title2')}</h2>
+      <p>{t('cta.text')}</p>
       <form class="cta-form" action="#" method="post">
-        <input type="email" name="email" placeholder="Seu e-mail corporativo" aria-label="Seu e-mail corporativo" required />
-        <button class="btn btn-primary" type="submit">Agendar demonstração</button>
+        <input type="email" name="email" placeholder={t('cta.placeholder')} aria-label={t('cta.placeholder')} required />
+        <button class="btn btn-primary" type="submit">{t('cta.button')}</button>
       </form>
-      <span class="cta-note">Sem compromisso. Direto com nosso time de especialistas.</span>
+      <span class="cta-note">{t('cta.note')}</span>
     </div>
   </div>
 </section>

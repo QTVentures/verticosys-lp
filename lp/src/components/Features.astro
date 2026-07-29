@@ -1,6 +1,11 @@
 ---
 // Blocos de features em composição 2 colunas alternadas (texto ↔ visual),
 // com numeração mono estilo Linear ("2.1 Projects") e animações de reveal.
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const cur = lang === 'pt' ? 'R$' : '$';
 ---
 
 <section class="section" id="recursos">
@@ -8,40 +13,32 @@
 
     <!-- Cabeçalho de seção: heading gigante à esquerda, parágrafo à direita -->
     <div class="section-head">
-      <h2 class="section-head-title" data-reveal>Mova a operação<br />financeira para frente.</h2>
+      <h2 class="section-head-title" data-reveal>{t('feat.head.title1')}<br />{t('feat.head.title2')}</h2>
       <div class="section-head-side" data-reveal style="--d: 0.15s">
-        <p>
-          Centralize processos, aprovações, cobranças e indicadores.
-          Menos consolidação manual, mais controle operacional — com
-          rastreabilidade em cada etapa.
-        </p>
-        <a class="mono-link" href="#governanca"><span class="mono-index">1.0</span> Explorar <span aria-hidden="true">→</span></a>
+        <p>{t('feat.head.text')}</p>
+        <a class="mono-link" href="#governanca"><span class="mono-index">1.0</span> {t('feat.head.link')} <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
     <!-- Bloco 1 — Controle Financeiro -->
     <div class="feature">
       <div class="feature-copy" data-stagger>
-        <span class="feature-index"><span class="mono-index">1.1</span><span class="section-label">Controle financeiro</span></span>
-        <h3 class="feature-title">Toda a operação em um único ambiente.</h3>
-        <p>
-          Informações dispersas geram risco e ineficiência. A VerticoSys conecta dados,
-          processos e indicadores para proporcionar visibilidade completa sobre a operação
-          financeira — do saldo consolidado à última aprovação.
-        </p>
+        <span class="feature-index"><span class="mono-index">1.1</span><span class="section-label">{t('feat.1.label')}</span></span>
+        <h3 class="feature-title">{t('feat.1.title')}</h3>
+        <p>{t('feat.1.text')}</p>
         <ul class="feature-list">
-          <li>Centralização de contas, cobranças e pagamentos</li>
-          <li>Indicadores consolidados em tempo real</li>
-          <li>Visão única por empresa, área ou centro de custo</li>
+          <li>{t('feat.1.li1')}</li>
+          <li>{t('feat.1.li2')}</li>
+          <li>{t('feat.1.li3')}</li>
         </ul>
       </div>
       <div class="feature-visual" data-reveal>
         <div class="visual-card">
-          <div class="vc-head">Consolidação por unidade</div>
-          <div class="vc-row"><span>Matriz São Paulo</span><span class="vc-bar"><i style="width: 86%"></i></span><span class="vc-val">R$ 2.1M</span></div>
-          <div class="vc-row"><span>Filial Campinas</span><span class="vc-bar"><i style="width: 62%; transition-delay: 0.35s"></i></span><span class="vc-val">R$ 1.4M</span></div>
-          <div class="vc-row"><span>Filial Curitiba</span><span class="vc-bar"><i style="width: 44%; transition-delay: 0.5s"></i></span><span class="vc-val">R$ 890K</span></div>
-          <div class="vc-row"><span>Operações digitais</span><span class="vc-bar"><i style="width: 30%; transition-delay: 0.65s"></i></span><span class="vc-val">R$ 410K</span></div>
+          <div class="vc-head">{t('feat.1.card')}</div>
+          <div class="vc-row"><span>{t('feat.1.unit1')}</span><span class="vc-bar"><i style="width: 86%"></i></span><span class="vc-val">{cur} 2.1M</span></div>
+          <div class="vc-row"><span>{t('feat.1.unit2')}</span><span class="vc-bar"><i style="width: 62%; transition-delay: 0.35s"></i></span><span class="vc-val">{cur} 1.4M</span></div>
+          <div class="vc-row"><span>{t('feat.1.unit3')}</span><span class="vc-bar"><i style="width: 44%; transition-delay: 0.5s"></i></span><span class="vc-val">{cur} 890K</span></div>
+          <div class="vc-row"><span>{t('feat.1.unit4')}</span><span class="vc-bar"><i style="width: 30%; transition-delay: 0.65s"></i></span><span class="vc-val">{cur} 410K</span></div>
         </div>
       </div>
     </div>
@@ -49,27 +46,23 @@
     <!-- Bloco 2 — Eficiência e Automação -->
     <div class="feature reverse">
       <div class="feature-copy" data-stagger>
-        <span class="feature-index"><span class="mono-index">1.2</span><span class="section-label">Eficiência e automação</span></span>
-        <h3 class="feature-title">Menos etapas manuais. Mais fluxo.</h3>
-        <p>
-          Rotinas fragmentadas viram fluxos estruturados, auditáveis e escaláveis.
-          Aprovações, conciliações e cobranças seguem regras definidas pela sua
-          governança — sem controles paralelos nem consolidação manual.
-        </p>
+        <span class="feature-index"><span class="mono-index">1.2</span><span class="section-label">{t('feat.2.label')}</span></span>
+        <h3 class="feature-title">{t('feat.2.title')}</h3>
+        <p>{t('feat.2.text')}</p>
         <ul class="feature-list">
-          <li>Fluxos de aprovação com alçadas configuráveis</li>
-          <li>Conciliação automática de recebimentos</li>
-          <li>Régua de cobrança estruturada e rastreável</li>
+          <li>{t('feat.2.li1')}</li>
+          <li>{t('feat.2.li2')}</li>
+          <li>{t('feat.2.li3')}</li>
         </ul>
       </div>
       <div class="feature-visual" data-reveal>
         <div class="visual-card">
-          <div class="vc-head">Fluxo de aprovação · <span class="mono-index">FIN-2042</span></div>
+          <div class="vc-head">{t('feat.2.card')} <span class="mono-index">FIN-2042</span></div>
           <div class="flow" data-stagger>
-            <div class="flow-step done"><span class="flow-dot"></span><div><strong>Solicitação criada</strong><em>Ana Ribeiro · Financeiro</em></div></div>
-            <div class="flow-step done"><span class="flow-dot"></span><div><strong>Validação orçamentária</strong><em>Automática · dentro da alçada</em></div></div>
-            <div class="flow-step active"><span class="flow-dot"></span><div><strong>Aprovação da controladoria</strong><em>Pendente · SLA 4h</em></div></div>
-            <div class="flow-step"><span class="flow-dot"></span><div><strong>Liquidação programada</strong><em>Agendamento automático</em></div></div>
+            <div class="flow-step done"><span class="flow-dot"></span><div><strong>{t('feat.2.step1')}</strong><em>{t('feat.2.step1meta')}</em></div></div>
+            <div class="flow-step done"><span class="flow-dot"></span><div><strong>{t('feat.2.step2')}</strong><em>{t('feat.2.step2meta')}</em></div></div>
+            <div class="flow-step active"><span class="flow-dot"></span><div><strong>{t('feat.2.step3')}</strong><em>{t('feat.2.step3meta')}</em></div></div>
+            <div class="flow-step"><span class="flow-dot"></span><div><strong>{t('feat.2.step4')}</strong><em>{t('feat.2.step4meta')}</em></div></div>
           </div>
         </div>
       </div>
@@ -78,27 +71,23 @@
     <!-- Bloco 3 — Inteligência para Decisão -->
     <div class="feature">
       <div class="feature-copy" data-stagger>
-        <span class="feature-index"><span class="mono-index">1.3</span><span class="section-label">Inteligência para decisão</span></span>
-        <h3 class="feature-title">Dados operacionais viram decisão estratégica.</h3>
-        <p>
-          Transformamos dados dispersos em indicadores e informações que apoiam a tomada
-          de decisão. Relatórios conectam números, processos e aprovações ao que realmente
-          importa: crescer com risco controlado.
-        </p>
+        <span class="feature-index"><span class="mono-index">1.3</span><span class="section-label">{t('feat.3.label')}</span></span>
+        <h3 class="feature-title">{t('feat.3.title')}</h3>
+        <p>{t('feat.3.text')}</p>
         <ul class="feature-list">
-          <li>Projeção de fluxo de caixa por cenário</li>
-          <li>Indicadores de inadimplência e ciclo financeiro</li>
-          <li>Relatórios prontos para diretoria e conselho</li>
+          <li>{t('feat.3.li1')}</li>
+          <li>{t('feat.3.li2')}</li>
+          <li>{t('feat.3.li3')}</li>
         </ul>
       </div>
       <div class="feature-visual" data-reveal>
         <div class="visual-card">
-          <div class="vc-head">Indicadores do período</div>
+          <div class="vc-head">{t('feat.3.card')}</div>
           <div class="stats" data-stagger>
-            <div class="stat"><span class="stat-val" data-count-to="98.1" data-decimals="1" data-suffix="%">0%</span><span class="stat-label">Conciliação automática</span></div>
-            <div class="stat"><span class="stat-val" data-count-to="4" data-suffix="h">0h</span><span class="stat-label">Ciclo médio de aprovação</span></div>
-            <div class="stat"><span class="stat-val" data-count-to="32" data-prefix="-" data-suffix="%">0%</span><span class="stat-label">Esforço operacional</span></div>
-            <div class="stat"><span class="stat-val" data-count-to="100" data-suffix="%">0%</span><span class="stat-label">Ações rastreáveis</span></div>
+            <div class="stat"><span class="stat-val" data-count-to="98.1" data-decimals="1" data-suffix="%" data-lang={lang}>0%</span><span class="stat-label">{t('feat.3.stat1')}</span></div>
+            <div class="stat"><span class="stat-val" data-count-to="4" data-suffix="h" data-lang={lang}>0h</span><span class="stat-label">{t('feat.3.stat2')}</span></div>
+            <div class="stat"><span class="stat-val" data-count-to="32" data-prefix="-" data-suffix="%" data-lang={lang}>0%</span><span class="stat-label">{t('feat.3.stat3')}</span></div>
+            <div class="stat"><span class="stat-val" data-count-to="100" data-suffix="%" data-lang={lang}>0%</span><span class="stat-label">{t('feat.3.stat4')}</span></div>
           </div>
         </div>
       </div>

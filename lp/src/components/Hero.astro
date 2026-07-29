@@ -1,6 +1,10 @@
 ---
 import DashboardMockup from './DashboardMockup.astro';
 import HeroGrid from './HeroGrid.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="hero" id="plataforma">
@@ -8,17 +12,13 @@ import HeroGrid from './HeroGrid.astro';
   <div class="container">
     <div class="hero-copy">
       <h1>
-        <span class="enter line" style="--d: 0.08s">Controle financeiro</span>
-        <span class="enter line" style="--d: 0.18s">sem pontos cegos.</span>
+        <span class="enter line" style="--d: 0.08s">{t('hero.title1')}</span>
+        <span class="enter line" style="--d: 0.18s">{t('hero.title2')}</span>
       </h1>
-      <p class="hero-sub enter" style="--d: 0.34s">
-        Visibilidade, governança e inteligência para operações que exigem precisão.
-        A VerticoSys centraliza processos, aprovações, cobranças e indicadores
-        em um único ambiente.
-      </p>
+      <p class="hero-sub enter" style="--d: 0.34s">{t('hero.sub')}</p>
       <div class="hero-actions enter" style="--d: 0.5s">
-        <a class="btn btn-primary" href="#cta">Agendar demonstração</a>
-        <a class="link-arrow" href="#recursos">Conhecer a plataforma <span aria-hidden="true">→</span></a>
+        <a class="btn btn-primary" href="#cta">{t('hero.cta')}</a>
+        <a class="link-arrow" href="#recursos">{t('hero.link')} <span aria-hidden="true">→</span></a>
       </div>
     </div>
     <div class="hero-mock enter-mock" style="--d: 0.62s">

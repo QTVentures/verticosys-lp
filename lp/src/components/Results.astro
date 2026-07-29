@@ -1,37 +1,37 @@
 ---
 // Números + depoimento — prova de impacto real, conforme diretriz do brandbook
 // ("demonstrar impacto real, sem promessas absolutas").
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="results section" id="resultados">
   <div class="container">
     <div class="results-head">
-      <span class="feature-index" data-reveal><span class="mono-index">3.0</span><span class="section-label">Resultados</span></span>
-      <h2 data-reveal style="--d: 0.1s">Impacto real na operação financeira.</h2>
+      <span class="feature-index" data-reveal><span class="mono-index">3.0</span><span class="section-label">{t('res.label')}</span></span>
+      <h2 data-reveal style="--d: 0.1s">{t('res.title')}</h2>
     </div>
     <div class="results-grid" data-stagger>
       <div class="metric">
         <span class="metric-val" data-count-to="40" data-prefix="-" data-suffix="%">-0%</span>
-        <p>de tempo dedicado à consolidação manual de dados no fechamento mensal.</p>
+        <p>{t('res.m1')}</p>
       </div>
       <div class="metric">
         <span class="metric-val" data-count-to="3" data-suffix="x">0x</span>
-        <p>mais agilidade no ciclo de aprovações com alçadas automatizadas.</p>
+        <p>{t('res.m2')}</p>
       </div>
       <div class="metric">
         <span class="metric-val" data-count-to="100" data-suffix="%">0%</span>
-        <p>das movimentações com trilha de auditoria disponível para compliance.</p>
+        <p>{t('res.m3')}</p>
       </div>
     </div>
     <figure class="quote" data-reveal>
-      <blockquote>
-        "A VerticoSys nos deu o que planilha nenhuma dava: uma única visão da operação,
-        com rastreabilidade de ponta a ponta. O fechamento deixou de ser um evento
-        e virou rotina."
-      </blockquote>
+      <blockquote>{t('res.quote')}</blockquote>
       <figcaption>
-        <span class="quote-name">Diretora Financeira</span>
-        <span class="quote-role">Grupo do setor de serviços B2B · 1.200 colaboradores</span>
+        <span class="quote-name">{t('res.quote.name')}</span>
+        <span class="quote-role">{t('res.quote.role')}</span>
       </figcaption>
     </figure>
   </div>

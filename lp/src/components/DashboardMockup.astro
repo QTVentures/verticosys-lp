@@ -1,54 +1,59 @@
 ---
 // Mockup de produto — dashboard financeiro simulado em HTML/CSS,
 // no estilo "product-screenshot-first" da Linear.
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const cur = lang === 'pt' ? 'R$' : '$';
 ---
 
-<div class="mock" role="img" aria-label="Interface da plataforma VerticoSys: painel financeiro com indicadores, fluxo de aprovações e fluxo de caixa">
+<div class="mock" role="img" aria-label={t('mock.alt')}>
   <div class="mock-chrome" aria-hidden="true">
     <span class="dot"></span><span class="dot"></span><span class="dot"></span>
     <span class="mock-url">app.verticosys.com</span>
   </div>
   <div class="mock-body" aria-hidden="true">
     <aside class="mock-side">
-      <div class="side-item active">Visão geral</div>
-      <div class="side-item">Aprovações</div>
-      <div class="side-item">Cobranças</div>
-      <div class="side-item">Conciliação</div>
-      <div class="side-item">Relatórios</div>
-      <div class="side-item">Auditoria</div>
+      <div class="side-item active">{t('mock.nav.overview')}</div>
+      <div class="side-item">{t('mock.nav.approvals')}</div>
+      <div class="side-item">{t('mock.nav.billing')}</div>
+      <div class="side-item">{t('mock.nav.reconciliation')}</div>
+      <div class="side-item">{t('mock.nav.reports')}</div>
+      <div class="side-item">{t('mock.nav.audit')}</div>
     </aside>
     <div class="mock-main">
       <div class="mock-topline">
-        <span class="mock-title">Visão geral · Julho 2026</span>
-        <span class="mock-badge">Atualizado agora</span>
+        <span class="mock-title">{t('mock.title')}</span>
+        <span class="mock-badge">{t('mock.badge')}</span>
       </div>
       <div class="kpis">
         <div class="kpi">
-          <span class="kpi-label">Saldo consolidado</span>
-          <span class="kpi-value">R$ 4.82M</span>
-          <span class="kpi-delta up">+3,2% vs. jun</span>
+          <span class="kpi-label">{t('mock.kpi1.label')}</span>
+          <span class="kpi-value">{cur} 4.82M</span>
+          <span class="kpi-delta up">{t('mock.kpi1.delta')}</span>
         </div>
         <div class="kpi">
-          <span class="kpi-label">A receber (30d)</span>
-          <span class="kpi-value">R$ 1.36M</span>
-          <span class="kpi-delta up">98,1% conciliado</span>
+          <span class="kpi-label">{t('mock.kpi2.label')}</span>
+          <span class="kpi-value">{cur} 1.36M</span>
+          <span class="kpi-delta up">{t('mock.kpi2.delta')}</span>
         </div>
         <div class="kpi">
-          <span class="kpi-label">Aprovações pendentes</span>
+          <span class="kpi-label">{t('mock.kpi3.label')}</span>
           <span class="kpi-value">12</span>
-          <span class="kpi-delta warn">4 críticas</span>
+          <span class="kpi-delta warn">{t('mock.kpi3.delta')}</span>
         </div>
         <div class="kpi">
-          <span class="kpi-label">Inadimplência</span>
-          <span class="kpi-value">1,8%</span>
-          <span class="kpi-delta up">-0,4 p.p.</span>
+          <span class="kpi-label">{t('mock.kpi4.label')}</span>
+          <span class="kpi-value">{lang === 'pt' ? '1,8%' : '1.8%'}</span>
+          <span class="kpi-delta up">{t('mock.kpi4.delta')}</span>
         </div>
       </div>
       <div class="mock-grid">
         <div class="panel chart-panel">
           <div class="panel-head">
-            <span>Fluxo de caixa projetado</span>
-            <span class="panel-meta">90 dias</span>
+            <span>{t('mock.chart.title')}</span>
+            <span class="panel-meta">{t('mock.chart.meta')}</span>
           </div>
           <div class="chart">
             <div class="bar" style="--h: 42%"></div>
@@ -65,29 +70,29 @@
         </div>
         <div class="panel">
           <div class="panel-head">
-            <span>Fluxo de aprovações</span>
-            <span class="panel-meta">Hoje</span>
+            <span>{t('mock.flow.title')}</span>
+            <span class="panel-meta">{t('mock.flow.meta')}</span>
           </div>
           <div class="rows">
             <div class="row">
               <span class="row-id">FIN-2041</span>
-              <span class="row-text">Pagamento fornecedor — R$ 84.200</span>
-              <span class="tag ok">Aprovado</span>
+              <span class="row-text">{t('mock.row1')}</span>
+              <span class="tag ok">{t('mock.tag.approved')}</span>
             </div>
             <div class="row">
               <span class="row-id">FIN-2042</span>
-              <span class="row-text">Contrato anual — R$ 312.000</span>
-              <span class="tag pending">Em análise</span>
+              <span class="row-text">{t('mock.row2')}</span>
+              <span class="tag pending">{t('mock.tag.review')}</span>
             </div>
             <div class="row">
               <span class="row-id">FIN-2043</span>
-              <span class="row-text">Reembolso diretoria — R$ 6.180</span>
-              <span class="tag ok">Aprovado</span>
+              <span class="row-text">{t('mock.row3')}</span>
+              <span class="tag ok">{t('mock.tag.approved')}</span>
             </div>
             <div class="row">
               <span class="row-id">FIN-2044</span>
-              <span class="row-text">Renovação SaaS — R$ 48.900</span>
-              <span class="tag waiting">Aguardando</span>
+              <span class="row-text">{t('mock.row4')}</span>
+              <span class="tag waiting">{t('mock.tag.waiting')}</span>
             </div>
           </div>
         </div>

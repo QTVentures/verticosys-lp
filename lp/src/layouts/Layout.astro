@@ -1,19 +1,33 @@
 ---
 import '../styles/global.css';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 interface Props {
   title?: string;
   description?: string;
+  /** caminho equivalente em pt e en, para hreflang/canonical */
+  altPt?: string;
+  altEn?: string;
 }
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const {
-  title = 'VerticoSys — Controle financeiro sem pontos cegos',
-  description = 'A VerticoSys centraliza processos, aprovações, cobranças e informações financeiras em um único ambiente. Controle operacional, rastreabilidade e clareza para decisões com confiança.',
+  title = t('meta.title'),
+  description = t('meta.description'),
+  altPt = '/',
+  altEn = '/en/',
 } = Astro.props;
+
+const site = 'https://verticosys.com';
+const htmlLang = lang === 'pt' ? 'pt-BR' : 'en';
+const ogLocale = lang === 'pt' ? 'pt_BR' : 'en_US';
+const canonical = site + (lang === 'pt' ? altPt : altEn);
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,9 +36,12 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale" content={ogLocale} />
     <meta name="theme-color" content="#706cb0" />
-    <link rel="canonical" href="https://verticosys.com/" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="pt-BR" href={site + altPt} />
+    <link rel="alternate" hreflang="en" href={site + altEn} />
+    <link rel="alternate" hreflang="x-default" href={site + altPt} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" href="/fonts/ToshA-Medium.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/NeulisSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
@@ -60,7 +77,11 @@ const {
       document.querySelectorAll('[data-reveal], .fade-up').forEach((el) => io.observe(el));
 
       // ----- contadores animados -----
-      const fmt = (v: number, d: number) => v.toFixed(d).replace('.', ',');
+      const pageLang = document.documentElement.lang.startsWith('pt') ? 'pt' : 'en';
+      const fmt = (v: number, d: number) => {
+        const s = v.toFixed(d);
+        return pageLang === 'pt' ? s.replace('.', ',') : s;
+      };
       const cio = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {

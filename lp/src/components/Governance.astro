@@ -1,32 +1,32 @@
 ---
 // Seção de governança — usa foto corporativa da marca como apoio visual.
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="gov section" id="governanca">
   <div class="container gov-grid">
     <div class="gov-media" data-reveal>
-      <img src="/images/corporate-buildings.webp" alt="Edifícios corporativos vistos de baixo, transmitindo solidez e governança" loading="lazy" decoding="async" width="1100" height="733" />
+      <img src="/images/corporate-buildings.webp" alt={t('gov.img.alt')} loading="lazy" decoding="async" width="1100" height="733" />
     </div>
     <div class="gov-copy">
-      <span class="feature-index" data-reveal><span class="mono-index">2.0</span><span class="section-label">Governança e compliance</span></span>
-      <h2 data-reveal style="--d: 0.1s">Rastreabilidade completa, por padrão.</h2>
-      <p data-reveal style="--d: 0.2s">
-        Todas as ações realizadas na plataforma possuem rastreabilidade completa:
-        histórico de alterações, aprovações e movimentações disponíveis para auditoria
-        e conformidade operacional.
-      </p>
+      <span class="feature-index" data-reveal><span class="mono-index">2.0</span><span class="section-label">{t('gov.label')}</span></span>
+      <h2 data-reveal style="--d: 0.1s">{t('gov.title')}</h2>
+      <p data-reveal style="--d: 0.2s">{t('gov.text')}</p>
       <div class="gov-points" data-stagger>
         <div class="gov-point">
-          <h3>Trilha de auditoria</h3>
-          <p>Cada movimentação registra autor, data e contexto — nada acontece fora do histórico.</p>
+          <h3>{t('gov.p1.title')}</h3>
+          <p>{t('gov.p1.text')}</p>
         </div>
         <div class="gov-point">
-          <h3>Alçadas e permissões</h3>
-          <p>Papéis e limites de aprovação definidos pela sua estrutura de governança.</p>
+          <h3>{t('gov.p2.title')}</h3>
+          <p>{t('gov.p2.text')}</p>
         </div>
         <div class="gov-point">
-          <h3>Consistência de dados</h3>
-          <p>Uma única fonte de verdade para números que sustentam decisões críticas.</p>
+          <h3>{t('gov.p3.title')}</h3>
+          <p>{t('gov.p3.text')}</p>
         </div>
       </div>
     </div>

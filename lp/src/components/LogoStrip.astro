@@ -1,12 +1,17 @@
 ---
 // Prova social — marquee infinito de logos em cinza neutro, estilo Linear.
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const companies = ['Atlas Capital', 'Nordica', 'Grupo Vetor', 'Prisma S.A.', 'Corten', 'Alta Holding', 'Meridian', 'Baseforte'];
 const loop = [...companies, ...companies];
 ---
 
 <section class="strip">
   <div class="container">
-    <p class="strip-label" data-reveal>Escolhida por equipes financeiras que operam com precisão</p>
+    <p class="strip-label" data-reveal>{t('logos.label')}</p>
   </div>
   <div class="marquee" data-reveal style="--d: 0.15s">
     <div class="marquee-track">

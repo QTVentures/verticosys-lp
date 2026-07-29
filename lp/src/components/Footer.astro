@@ -1,5 +1,12 @@
 ---
 import Logo from './Logo.astro';
+import { getLangFromUrl, useTranslations, homePath, termsPath } from '../i18n/utils';
+import { company } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const home = homePath(lang);
+const terms = termsPath(lang);
 const year = new Date().getFullYear();
 ---
 
@@ -7,33 +14,58 @@ const year = new Date().getFullYear();
   <div class="container footer-grid">
     <div class="footer-brand">
       <Logo />
-      <p>Controle, visibilidade e organização para operações financeiras complexas.</p>
+      <p>{t('footer.tagline')}</p>
     </div>
     <div class="footer-col">
-      <p class="footer-title">Plataforma</p>
-      <a href="#recursos">Controle financeiro</a>
-      <a href="#recursos">Automação</a>
-      <a href="#governanca">Governança</a>
-      <a href="#resultados">Resultados</a>
+      <p class="footer-title">{t('footer.col1')}</p>
+      <a href={`${home}#recursos`}>{t('footer.col1.a')}</a>
+      <a href={`${home}#recursos`}>{t('footer.col1.b')}</a>
+      <a href={`${home}#governanca`}>{t('footer.col1.c')}</a>
+      <a href={`${home}#resultados`}>{t('footer.col1.d')}</a>
     </div>
     <div class="footer-col">
-      <p class="footer-title">Empresa</p>
-      <a href="#">Sobre a VerticoSys</a>
-      <a href="#">Segurança</a>
-      <a href="#">Carreiras</a>
-      <a href="#">Contato</a>
+      <p class="footer-title">{t('footer.col2')}</p>
+      <a href={`${home}#plataforma`}>{t('footer.col2.a')}</a>
+      <a href={`${home}#governanca`}>{t('footer.col2.b')}</a>
+      <a href="#">{t('footer.col2.c')}</a>
+      <a href={`tel:${company.phoneHref}`}>{t('footer.col2.d')}</a>
     </div>
     <div class="footer-col">
-      <p class="footer-title">Recursos</p>
-      <a href="#">Central de ajuda</a>
-      <a href="#">Documentação</a>
-      <a href="#">Política de privacidade</a>
-      <a href="#">Termos de uso</a>
+      <p class="footer-title">{t('footer.col3')}</p>
+      <a href="#">{t('footer.col3.a')}</a>
+      <a href="#">{t('footer.col3.b')}</a>
+      <a href="#">{t('footer.col3.c')}</a>
+      <a href={terms}>{t('footer.col3.d')}</a>
     </div>
   </div>
+
+  <div class="container footer-company">
+    <p class="footer-title">{t('footer.company.title')}</p>
+    <div class="company-grid">
+      <p class="company-legal">
+        <span class="company-note">{t('footer.company.note')}</span>
+        <span class="company-name">{company.legalName}</span>
+      </p>
+      <dl class="company-data">
+        <div>
+          <dt>CNPJ</dt>
+          <dd>{company.cnpj}</dd>
+        </div>
+        <div>
+          <dt>{lang === 'pt' ? 'Endereço' : 'Address'}</dt>
+          <dd>{company.address}</dd>
+        </div>
+        <div>
+          <dt>{lang === 'pt' ? 'Telefone' : 'Phone'}</dt>
+          <dd><a href={`tel:${company.phoneHref}`}>{company.phone}</a></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
   <div class="container footer-bottom">
-    <span>© {year} VerticoSys. Todos os direitos reservados.</span>
-    <span>Feito para equipes que exigem precisão.</span>
+    <span>© {year} VerticoSys. {t('footer.rights')}</span>
+    <span>{t('footer.made')}</span>
   </div>
 </footer>
 
@@ -61,7 +93,7 @@ const year = new Date().getFullYear();
     flex-direction: column;
     gap: 10px;
   }
-  .footer-col .footer-title {
+  .footer-title {
     font-family: var(--font-body);
     font-size: var(--text-caption);
     font-weight: 400;
@@ -76,12 +108,62 @@ const year = new Date().getFullYear();
   .footer-col a:hover {
     color: var(--brand);
   }
+
+  /* ---------- dados da empresa ---------- */
+  .footer-company {
+    margin-top: var(--space-64);
+    padding-top: var(--space-32);
+    border-top: 1px solid var(--border-hairline);
+  }
+  .company-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 2.4fr;
+    gap: var(--space-48);
+    align-items: start;
+  }
+  .company-legal {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 300px;
+  }
+  .company-note {
+    font-size: var(--text-label);
+    color: var(--text-faint);
+  }
+  .company-name {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+  .company-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-24);
+  }
+  .company-data dt {
+    font-size: var(--text-label);
+    color: var(--text-faint);
+    margin-bottom: 3px;
+  }
+  .company-data dd {
+    font-size: 12.5px;
+    color: #6b6b74;
+    line-height: 1.5;
+  }
+  .company-data dd a {
+    transition: color 0.15s ease;
+  }
+  .company-data dd a:hover {
+    color: var(--brand);
+  }
+
   .footer-bottom {
     display: flex;
     justify-content: space-between;
     gap: 16px;
     flex-wrap: wrap;
-    margin-top: var(--space-64);
+    margin-top: var(--space-40);
     padding-top: var(--space-24);
     border-top: 1px solid var(--border-hairline);
     font-size: var(--text-label);
@@ -89,5 +171,7 @@ const year = new Date().getFullYear();
   }
   @media (max-width: 860px) {
     .footer-grid { grid-template-columns: 1fr 1fr; }
+    .company-grid { grid-template-columns: 1fr; gap: var(--space-24); }
+    .company-data { grid-template-columns: 1fr; gap: var(--space-16); }
   }
 </style>
