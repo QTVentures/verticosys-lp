@@ -1,12 +1,13 @@
 ---
 import Logo from './Logo.astro';
-import { getLangFromUrl, useTranslations, homePath, termsPath } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, homePath, termsPath, privacyPath } from '../i18n/utils';
 import { company } from '../i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const home = homePath(lang);
 const terms = termsPath(lang);
+const privacy = privacyPath(lang);
 const year = new Date().getFullYear();
 ---
 
@@ -21,6 +22,7 @@ const year = new Date().getFullYear();
       <a href={`${home}#recursos`}>{t('footer.col1.a')}</a>
       <a href={`${home}#recursos`}>{t('footer.col1.b')}</a>
       <a href={`${home}#governanca`}>{t('footer.col1.c')}</a>
+      <a href={`${home}#planos`}>{t('nav.pricing')}</a>
       <a href={`${home}#resultados`}>{t('footer.col1.d')}</a>
     </div>
     <div class="footer-col">
@@ -34,7 +36,7 @@ const year = new Date().getFullYear();
       <p class="footer-title">{t('footer.col3')}</p>
       <a href="#">{t('footer.col3.a')}</a>
       <a href="#">{t('footer.col3.b')}</a>
-      <a href="#">{t('footer.col3.c')}</a>
+      <a href={privacy}>{t('footer.col3.c')}</a>
       <a href={terms}>{t('footer.col3.d')}</a>
     </div>
   </div>

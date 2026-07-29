@@ -1,5 +1,16 @@
 ---
-import TermsPage from '../components/TermsPage.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { terms } from '../i18n/legal-terms';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations('pt');
 ---
 
-<TermsPage />
+<LegalPage
+  doc={terms}
+  title={t('meta.terms.title')}
+  description={t('meta.terms.description')}
+  altPt="/termosdeuso"
+  altEn="/en/termsofuse"
+  active="terms"
+/>

@@ -10,6 +10,7 @@ export type Lang = keyof typeof languages;
 // Slugs das páginas por idioma
 export const routes = {
   terms: { pt: '/termosdeuso', en: '/en/termsofuse' },
+  privacy: { pt: '/politicadeprivacidade', en: '/en/privacypolicy' },
   home: { pt: '/', en: '/en/' },
 } as const;
 
@@ -22,12 +23,17 @@ export const ui = {
     'meta.terms.title': 'Termos de Uso — VerticoSys',
     'meta.terms.description':
       'Termos de Uso da plataforma VerticoSys, operada por Anitec Tecnologia em Sistemas de Informações Ltda.',
+    'meta.privacy.title': 'Política de Privacidade — VerticoSys',
+    'meta.privacy.description':
+      'Como a VerticoSys coleta, utiliza, compartilha e protege dados pessoais, nos termos da LGPD (Lei nº 13.709/2018).',
 
     // ---------- nav ----------
     'nav.platform': 'Plataforma',
     'nav.features': 'Recursos',
     'nav.governance': 'Governança',
+    'nav.pricing': 'Planos',
     'nav.results': 'Resultados',
+    'nav.terms': 'Termos',
     'nav.login': 'Entrar',
     'nav.cta': 'Agendar demonstração',
     'nav.home': 'VerticoSys — início',
@@ -179,6 +185,42 @@ export const ui = {
     'cta.button': 'Agendar demonstração',
     'cta.note': 'Sem compromisso. Direto com nosso time de especialistas.',
 
+    // ---------- pricing ----------
+    'price.label': 'Planos',
+    'price.title1': 'A plataforma certa,',
+    'price.title2': 'no plano certo.',
+    'price.sub':
+      'A cobrança é por usuário. O faturamento anual da sua empresa não gera custo adicional — ele apenas define em qual plano você se enquadra no onboarding.',
+    'price.toggle.monthly': 'Mensal',
+    'price.toggle.yearly': 'Anual',
+    'price.toggle.save': 'Economize até 20% no plano anual',
+    'price.per': 'por usuário/mês',
+    'price.billedMonthly': 'faturado mensalmente',
+    'price.billedYearly': 'faturado anualmente',
+    'price.off': 'de desconto',
+    'price.minUsers': 'Mínimo de {n} usuários',
+    'price.floor': 'Fatura mínima de {v}/mês',
+    'price.custom.value': 'Proposta dedicada',
+    'price.custom.sub': 'condições definidas em contrato',
+    'price.custom.users': 'Conforme o escopo',
+    'price.custom.invoice': 'Definida em proposta',
+    'price.cta': 'Agendar demonstração',
+    'price.cta.custom': 'Falar com vendas',
+    'price.features.first': 'PRINCIPAIS RECURSOS:',
+    'price.features.plus': 'TUDO DO {plan}, MAIS:',
+    'price.features.custom': 'ATENDIMENTO SOB MEDIDA:',
+    'price.note.title': 'Sobre os valores',
+    'price.note.1':
+      'O faturamento anual funciona apenas como critério de enquadramento no onboarding — a cobrança recorrente é 100% baseada no número de usuários ativos.',
+    'price.note.2':
+      'Tarifas de transação (PIX, boleto, câmbio, cartão e criptoativos) não estão incluídas na mensalidade e são cobradas à parte pelos parceiros de rails financeiros, com valores informados na plataforma antes de cada operação.',
+    'price.note.3':
+      'Valores em US$ são referência informativa para clientes internacionais; a cobrança é realizada em reais. Cotação de referência: R$ 5,10 (27/07/2026).',
+    'price.note.4':
+      '*Transações em criptoativos e expansões internacionais são liberadas gradualmente, conforme disponibilidade regulatória. Remessa internacional automatizada e folha internacional integram o roadmap e não estão disponíveis hoje.',
+    'price.note.5':
+      'Preços de referência sujeitos a validação comercial. Condições definitivas constam em proposta e contrato.',
+
     // ---------- footer ----------
     'footer.tagline':
       'Controle, visibilidade e organização para operações financeiras complexas.',
@@ -249,12 +291,17 @@ export const ui = {
     'meta.terms.title': 'Terms of Use — VerticoSys',
     'meta.terms.description':
       'Terms of Use for the VerticoSys platform, operated by Anitec Tecnologia em Sistemas de Informações Ltda.',
+    'meta.privacy.title': 'Privacy Policy — VerticoSys',
+    'meta.privacy.description':
+      'How VerticoSys collects, uses, shares and protects personal data under the Brazilian LGPD (Law No. 13,709/2018).',
 
     // ---------- nav ----------
     'nav.platform': 'Platform',
     'nav.features': 'Features',
     'nav.governance': 'Governance',
+    'nav.pricing': 'Pricing',
     'nav.results': 'Results',
+    'nav.terms': 'Terms',
     'nav.login': 'Log in',
     'nav.cta': 'Book a demo',
     'nav.home': 'VerticoSys — home',
@@ -404,6 +451,42 @@ export const ui = {
     'cta.placeholder': 'Your work email',
     'cta.button': 'Book a demo',
     'cta.note': 'No commitment. Straight to our specialist team.',
+
+    // ---------- pricing ----------
+    'price.label': 'Pricing',
+    'price.title1': 'The right platform,',
+    'price.title2': 'on the right plan.',
+    'price.sub':
+      'Pricing is per user. Your company’s annual revenue adds no cost — it only defines which plan you qualify for during onboarding.',
+    'price.toggle.monthly': 'Monthly',
+    'price.toggle.yearly': 'Yearly',
+    'price.toggle.save': 'Save up to 20% with yearly billing',
+    'price.per': 'per user/month',
+    'price.billedMonthly': 'billed monthly',
+    'price.billedYearly': 'billed yearly',
+    'price.off': 'off',
+    'price.minUsers': 'Minimum of {n} users',
+    'price.floor': 'Minimum invoice of {v}/month',
+    'price.custom.value': 'Dedicated proposal',
+    'price.custom.sub': 'terms defined by contract',
+    'price.custom.users': 'Based on scope',
+    'price.custom.invoice': 'Defined in the proposal',
+    'price.cta': 'Book a demo',
+    'price.cta.custom': 'Contact sales',
+    'price.features.first': 'KEY FEATURES:',
+    'price.features.plus': 'EVERYTHING IN {plan}, PLUS:',
+    'price.features.custom': 'TAILORED ENGAGEMENT:',
+    'price.note.title': 'About these figures',
+    'price.note.1':
+      'Annual revenue is only a qualification criterion during onboarding — recurring billing is based entirely on the number of active users.',
+    'price.note.2':
+      'Transaction fees (PIX, boleto, FX, cards and crypto assets) are not included in the subscription and are charged separately by the financial rails partners, with amounts shown in the platform before each operation.',
+    'price.note.3':
+      'USD amounts are informational references for international clients; billing is performed in Brazilian reais. Reference rate: R$5.10 (Jul 27, 2026).',
+    'price.note.4':
+      '*Crypto asset transactions and international expansion are released gradually, subject to regulatory availability. Automated international remittance and international payroll are on the roadmap and are not available today.',
+    'price.note.5':
+      'Reference prices subject to commercial validation. Final terms are set out in the proposal and agreement.',
 
     // ---------- footer ----------
     'footer.tagline':

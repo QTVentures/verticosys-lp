@@ -1,0 +1,16 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { privacy } from '../../i18n/legal-privacy';
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations('en');
+---
+
+<LegalPage
+  doc={privacy}
+  title={t('meta.privacy.title')}
+  description={t('meta.privacy.description')}
+  altPt="/politicadeprivacidade"
+  altEn="/en/privacypolicy"
+  active="privacy"
+/>

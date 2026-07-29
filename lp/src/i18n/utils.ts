@@ -23,6 +23,11 @@ export function termsPath(lang: Lang): string {
   return routes.terms[lang];
 }
 
+/** URL da política de privacidade no idioma. */
+export function privacyPath(lang: Lang): string {
+  return routes.privacy[lang];
+}
+
 /** URL da home no idioma. */
 export function homePath(lang: Lang): string {
   return routes.home[lang];

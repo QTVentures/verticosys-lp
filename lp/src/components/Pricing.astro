@@ -1,0 +1,435 @@
+---
+// Seção de precificação — grid de planos com divisores verticais e card destacado,
+// no espírito da referência (ClickUp) traduzido para a linguagem visual VerticoSys.
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { plans } from '../i18n/pricing';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const nf = (v: number) =>
+  lang === 'pt'
+    ? v.toLocaleString('pt-BR', { minimumFractionDigits: 0 })
+    : v.toLocaleString('en-US', { minimumFractionDigits: 0 });
+
+const money = (v: number) => (lang === 'pt' ? `R$ ${nf(v)}` : `$${nf(v)}`);
+const price = (p: { brl: number; usd: number }) => (lang === 'pt' ? p.brl : p.usd);
+---
+
+<section class="pricing section" id="planos">
+  <div class="container">
+    <header class="pricing-head">
+      <span class="feature-index" data-reveal><span class="mono-index">3.0</span><span class="section-label">{t('price.label')}</span></span>
+      <h2 data-reveal style="--d: 0.08s">{t('price.title1')}<br />{t('price.title2')}</h2>
+      <p data-reveal style="--d: 0.16s">{t('price.sub')}</p>
+    </header>
+
+    <div class="pricing-bar" data-reveal>
+      <span class="save-note">{t('price.toggle.save')}</span>
+      <div class="toggle" role="group" aria-label={t('price.label')}>
+        <button type="button" class="toggle-btn" data-cycle="monthly">{t('price.toggle.monthly')}</button>
+        <button type="button" class="toggle-btn is-active" data-cycle="yearly" aria-pressed="true">{t('price.toggle.yearly')}</button>
+      </div>
+    </div>
+
+    <div class="plans" data-reveal>
+      {plans.map((plan, i) => (
+        <article class:list={['plan', { featured: plan.popular }]}>
+          <div class="plan-top">
+            <div class="plan-name-row">
+              <h3>{plan.name[lang]}</h3>
+              {plan.popular && <span class="pill-popular">{lang === 'pt' ? 'Popular' : 'Popular'}</span>}
+            </div>
+            <p class="plan-revenue">{plan.revenue[lang]}</p>
+
+            {plan.custom ? (
+              <div class="plan-price">
+                <span class="plan-value custom">{t('price.custom.value')}</span>
+                <span class="plan-per">{t('price.custom.sub')}</span>
+              </div>
+            ) : (
+              <div class="plan-price">
+                <span class="plan-value">
+                  <span class="v-monthly is-hidden">{money(price(plan.monthly!))}</span>
+                  <span class="v-yearly">{money(price(plan.yearly!))}</span>
+                </span>
+                <span class="plan-per">
+                  {t('price.per')} ·
+                  <span class="v-monthly is-hidden"> {t('price.billedMonthly')}</span>
+                  <span class="v-yearly"> {t('price.billedYearly')}</span>
+                </span>
+                <span class="plan-off v-yearly">−{plan.yearly!.off}% {t('price.off')}</span>
+                <span class="plan-off v-monthly is-hidden">&nbsp;</span>
+              </div>
+            )}
+
+            <a class:list={['btn', plan.popular ? 'btn-on-dark' : 'btn-soft']} href="#cta">
+              {plan.custom ? t('price.cta.custom') : t('price.cta')}
+            </a>
+
+            <dl class="plan-meta">
+              <div>
+                <dt>{lang === 'pt' ? 'Usuários' : 'Users'}</dt>
+                <dd>
+                  {plan.custom
+                    ? t('price.custom.users')
+                    : t('price.minUsers').replace('{n}', String(plan.minUsers))}
+                </dd>
+              </div>
+              <div>
+                <dt>{lang === 'pt' ? 'Fatura mínima' : 'Minimum invoice'}</dt>
+                <dd>
+                  {plan.custom ? (
+                    <span>{t('price.custom.invoice')}</span>
+                  ) : (
+                    <>
+                      <span class="v-monthly is-hidden">{money(price(plan.floor!))}</span>
+                      <span class="v-yearly">{money(Math.round(price(plan.yearly!) * plan.minUsers!))}</span>
+                      <span class="meta-suffix">/{lang === 'pt' ? 'mês' : 'mo'}</span>
+                    </>
+                  )}
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="plan-features">
+            <p class="features-head">
+              {plan.custom
+                ? t('price.features.custom')
+                : i === 0
+                  ? t('price.features.first')
+                  : t('price.features.plus').replace('{plan}', plans[i - 1].name[lang].toUpperCase())}
+            </p>
+            <ul>
+              {plan.features[lang].map((f) => (
+                <li>
+                  <svg class="check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2.5 7.5l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .pricing {
+    border-top: 1px solid var(--border-hairline);
+  }
+  .pricing-head {
+    max-width: 720px;
+  }
+  .feature-index {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .feature-index .section-label {
+    margin-bottom: 0;
+  }
+  .pricing-head h2 {
+    margin-top: var(--space-24);
+  }
+  .pricing-head p {
+    margin-top: var(--space-24);
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    font-size: var(--text-body-lg);
+    max-width: 620px;
+  }
+
+  /* ---------- barra do toggle ---------- */
+  .pricing-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    margin: var(--space-48) 0 var(--space-24);
+  }
+  .save-note {
+    font-size: var(--text-caption);
+    color: var(--brand);
+  }
+  .toggle {
+    display: inline-flex;
+    padding: 3px;
+    background: var(--surface-2);
+    border-radius: var(--radius-pill);
+  }
+  .toggle-btn {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 7px 18px;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .toggle-btn.is-active {
+    background: var(--surface-0);
+    color: var(--text-primary);
+    box-shadow: 0 1px 3px rgba(29, 29, 29, 0.08);
+  }
+
+  /* ---------- grid de planos ---------- */
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* duas faixas: topo (preço/CTA) e features — alinhadas entre todos os cards */
+    grid-template-rows: auto auto;
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+  .plan {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border-hairline);
+    background: var(--surface-0);
+  }
+  /* onde houver suporte, o card herda as faixas do grid pai:
+     o divisor entre as duas metades fica na mesma altura em todos */
+  @supports (grid-template-rows: subgrid) {
+    .plan {
+      display: grid;
+      grid-row: span 2;
+      grid-template-rows: subgrid;
+    }
+  }
+  .plan:first-child {
+    border-left: none;
+  }
+  .plan.featured {
+    background: var(--brand);
+    color: #fff;
+  }
+  .plan-top {
+    padding: var(--space-32) var(--space-24);
+    border-bottom: 1px solid var(--border-hairline);
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+  }
+  .plan.featured .plan-top {
+    border-bottom-color: rgba(255, 255, 255, 0.22);
+  }
+  .plan-name-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .plan h3 {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .plan.featured h3 {
+    color: #fff;
+  }
+  .pill-popular {
+    font-size: 11px;
+    color: var(--brand-deep);
+    background: #fff;
+    border-radius: var(--radius-badge);
+    padding: 2px 8px;
+  }
+  .plan-revenue {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-faint);
+    line-height: 1.45;
+    min-height: 34px;
+  }
+  .plan.featured .plan-revenue {
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .plan-price {
+    margin-top: var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .plan-value {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .plan-value.custom {
+    font-size: 24px;
+    color: var(--text-primary);
+  }
+  .plan-per {
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+  .plan.featured .plan-per {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .plan-off {
+    font-size: 11.5px;
+    color: var(--brand);
+    min-height: 16px;
+  }
+  .plan.featured .plan-off {
+    color: #fff;
+  }
+
+  .plan .btn {
+    margin-top: auto;
+    width: 100%;
+  }
+  .btn-soft {
+    background: var(--surface-2);
+    color: var(--text-primary);
+  }
+  .btn-soft:hover {
+    background: var(--surface-3);
+  }
+  .btn-on-dark {
+    background: #fff;
+    color: var(--brand-deep);
+  }
+  .btn-on-dark:hover {
+    background: var(--brand-tint);
+  }
+
+  .plan-meta {
+    margin-top: var(--space-16);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .plan-meta div {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 11.5px;
+  }
+  .plan-meta dt {
+    color: var(--text-faint);
+  }
+  .plan-meta dd {
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+  .plan.featured .plan-meta dt {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .plan.featured .plan-meta dd {
+    color: #fff;
+  }
+  .plan.featured .meta-suffix {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .meta-suffix {
+    color: var(--text-faint);
+  }
+
+  /* ---------- features ---------- */
+  .plan-features {
+    padding: var(--space-32) var(--space-24) var(--space-40);
+  }
+  .features-head {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--text-faint);
+    margin-bottom: var(--space-20);
+    line-height: 1.5;
+  }
+  .plan.featured .features-head {
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .plan-features ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .plan-features li {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text-secondary);
+  }
+  .plan.featured .plan-features li {
+    color: rgba(255, 255, 255, 0.95);
+  }
+  .check {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--brand);
+  }
+  .plan.featured .check {
+    color: #fff;
+  }
+
+  .is-hidden {
+    display: none;
+  }
+
+  @media (max-width: 1080px) {
+    .plans {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .plan:nth-child(3) {
+      border-left: none;
+    }
+    .plan:nth-child(n + 3) {
+      border-top: 1px solid var(--border-hairline);
+    }
+    .plan-top {
+      min-height: 0;
+    }
+  }
+  @media (max-width: 680px) {
+    .plans {
+      grid-template-columns: 1fr;
+    }
+    .plan {
+      border-left: none;
+    }
+    .plan + .plan {
+      border-top: 1px solid var(--border-hairline);
+    }
+    .pricing-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>
+
+<script>
+  const section = document.getElementById('planos');
+  if (section) {
+    const buttons = section.querySelectorAll<HTMLButtonElement>('.toggle-btn');
+    const apply = (cycle: string) => {
+      buttons.forEach((b) => {
+        const on = b.dataset.cycle === cycle;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+      section.querySelectorAll('.v-monthly').forEach((el) =>
+        el.classList.toggle('is-hidden', cycle !== 'monthly')
+      );
+      section.querySelectorAll('.v-yearly').forEach((el) =>
+        el.classList.toggle('is-hidden', cycle !== 'yearly')
+      );
+    };
+    buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.cycle!)));
+  }
+</script>

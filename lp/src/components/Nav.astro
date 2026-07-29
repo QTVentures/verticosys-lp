@@ -25,11 +25,12 @@ const other = lang === 'pt' ? { href: altEn, label: 'EN' } : { href: altPt, labe
       <a href={`${home}#plataforma`}>{t('nav.platform')}</a>
       <a href={`${home}#recursos`}>{t('nav.features')}</a>
       <a href={`${home}#governanca`}>{t('nav.governance')}</a>
+      <a href={`${home}#planos`}>{t('nav.pricing')}</a>
       <a href={`${home}#resultados`}>{t('nav.results')}</a>
-      <a href={terms}>{t('footer.col3.d')}</a>
+      <a href={terms}>{t('nav.terms')}</a>
     </div>
     <div class="nav-actions">
-      <a class="lang-switch" href={other.href} hreflang={lang === 'pt' ? 'en' : 'pt-BR'} aria-label={lang === 'pt' ? 'Switch to English' : 'Mudar para português'}>
+      <a class="lang-switch" href={other.href} hreflang={lang === 'pt' ? 'en' : 'pt-BR'} title={lang === 'pt' ? 'Switch to English' : 'Mudar para português'}>
         <span class="lang-current">{lang === 'pt' ? 'PT' : 'EN'}</span>
         <span class="lang-sep">/</span>
         <span class="lang-other">{other.label}</span>
