@@ -45,6 +45,7 @@ const slug = (s: string) =>
         <div class="legal-entity">
           <span>{company.legalName}</span>
           <span>CNPJ: {company.cnpj}</span>
+          <span>EIN: {company.ein}</span>
           <span>{company.address}</span>
           <span>{lang === 'pt' ? 'Contato' : 'Contact'}: <a href={`tel:${company.phoneHref}`}>{company.phone}</a></span>
         </div>
