@@ -42,6 +42,7 @@ const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
           <p class="legal-company">
             {company.legalName}<br />
             CNPJ: {company.cnpj}<br />
+            EIN: {company.ein}<br />
             {company.address}<br />
             {lang === 'pt' ? 'Telefone' : 'Phone'}: <a href={`tel:${company.phoneHref}`}>{company.phone}</a>
           </p>

@@ -552,9 +552,10 @@ export const ui = {
 } as const;
 
 export const company = {
-  legalName: 'ANITEC TECNOLOGIA EM SISTEMAS DE INFORMAÇÕES LTDA',
-  cnpj: '41.522.323/0001-22',
-  address: 'Av. Brig. Faria Lima, 1811 — São Paulo, Brasil',
+  legalName: 'Quantum Global Licensing Holdings',
+  cnpj: '66.262.184/0001-76',
+  ein: '61-2331488',
+  address: '829 Washington Street',
   phone: '(43) 9934-0064',
   phoneHref: '+5543993400064',
 } as const;

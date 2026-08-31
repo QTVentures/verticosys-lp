@@ -54,6 +54,10 @@ const year = new Date().getFullYear();
           <dd>{company.cnpj}</dd>
         </div>
         <div>
+          <dt>EIN</dt>
+          <dd>{company.ein}</dd>
+        </div>
+        <div>
           <dt>{lang === 'pt' ? 'Endereço' : 'Address'}</dt>
           <dd>{company.address}</dd>
         </div>
@@ -140,7 +144,7 @@ const year = new Date().getFullYear();
   }
   .company-data {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: var(--space-24);
   }
   .company-data dt {
