@@ -556,6 +556,6 @@ export const company = {
   cnpj: '66.262.184/0001-76',
   ein: '61-2331488',
   address: '829 Washington Street',
-  phone: '(43) 9934-0064',
+  phone: '+55 (43) 9934-0064',
   phoneHref: '+5543993400064',
 } as const;
